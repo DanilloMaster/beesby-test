@@ -11,16 +11,7 @@
 </template>
 
 <script>
-import { validationMixin } from "vuelidate";
-import { required, email } from "vuelidate/lib/validators";
 export default {
-  mixins: [validationMixin],
-
-  validations: {
-    email: { required, email },
-    pass: { required }
-  },
-
   data() {
     return {
       email: "",
@@ -38,22 +29,6 @@ export default {
   methods: {
     test() {
       this.$router.push({ path: "/test", query: { nome: this.candidate } });
-    }
-  },
-
-  computed: {
-    passErrors() {
-      const errors = [];
-      if (!this.$v.pass.$dirty) return errors;
-      !this.$v.pass.required && errors.push("Senha é obrigatória.");
-      return errors;
-    },
-    emailErrors() {
-      const errors = [];
-      if (!this.$v.email.$dirty) return errors;
-      !this.$v.email.email && errors.push("Insira um email válido");
-      !this.$v.email.required && errors.push("Email é obrigatório");
-      return errors;
     }
   }
 };
